@@ -22,6 +22,6 @@ EntityID Entity::getEntityID()const{
 		return entity_id_;
 }
 
-void Entity::setEntityID(id){
+void Entity::setEntityID(EntityID id){
 		entity_id_ = id;
 }

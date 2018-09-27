@@ -1,4 +1,4 @@
-#include "KeyReader.h"
+#include "KeyBoard.h"
 
 Pressed KeyBoard::readKey(shared_ptr<sf::RenderWindow> window){
 	

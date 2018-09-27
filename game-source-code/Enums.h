@@ -9,17 +9,17 @@ enum class EntityID{
 		MUSHROOM
 };
 
-//enum class Pressed{
-//		RIGHT,
-//		LEFT,
-//		UP,
-//		DOWN,
-//		SPACE,
-//		P,
-//		S,
-//		ESCAPE,
-//		NONE
-//};
+enum class Pressed{
+		RIGHT,
+		LEFT,
+		UP,
+		DOWN,
+		SPACE,
+		P,
+		S,
+		ESCAPE,
+		NONE
+};
 //enum class Direction{
 //		LEFT,
 //		RIGHT,
