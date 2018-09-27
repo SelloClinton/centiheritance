@@ -15,6 +15,7 @@ public:
 	bool isLive()const;
 	void destroy();
 	EntityID getEntityID()const;
+	void setEntityID(EntityID id);
 private:
 	shared_ptr<Position> position_;
 	EntityID entity_id_;

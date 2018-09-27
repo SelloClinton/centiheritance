@@ -3,8 +3,9 @@
 
 enum class EntityID{
 		PLAYER,
-		BULLET,
-		SEGMENT,
+		LASER,
+		HEAD_SEGMENT,
+		MID_SEGMENT,
 		MUSHROOM
 };
 

@@ -21,3 +21,7 @@ void Entity::destroy(){
 EntityID Entity::getEntityID()const{
 		return entity_id_;
 }
+
+void Entity::setEntityID(id){
+		entity_id_ = id;
+}
