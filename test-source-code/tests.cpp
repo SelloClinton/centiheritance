@@ -1,9 +1,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "../game-source-code/Position.h"
-//#include "../game-source/Mover.h"
-//#include "../game-source/Bullet.h"
-//#include "../game-source/Segment.h"
+#include "../game-source-code/Entity.h"
+#include "../game-source-code/Enums.h"
+#include "../game-source-code/Mover.h"
 //#include "../game-source/Centipede.h"
 
 
@@ -110,9 +110,166 @@ TEST_CASE("Default position is origin"){
 ////*************************end of Position tests(9 tests)*********************************
 //
 //***************************Entity Tests************************************************
+TEST_CASE("position returns expcted results"){
+	auto x = 250.0f;
+	auto y = 350.0f;
+	auto player_id = EntityID::PLAYER;
+	auto entity = make_unique<Entity>(x,y,player_id);
+	auto [x_position,y_position] = entity->position()->getXYPosition();
+	
+	CHECK(doctest::Approx(x_position) == x);
+	CHECK(doctest::Approx(y_position) == y);
+}//10
 
+TEST_CASE("islive returns correct state"){
+	auto x = 150.0f;
+	auto y = 425.0f;
+	auto segment_id = EntityID::HEAD_SEGMENT;
+	auto entity = make_unique<Entity>(x,y,segment_id);
+	CHECK(entity->isLive());
+}//11
 
+TEST_CASE("an entity can be destroyed"){
+	auto x = 150.0f;
+	auto y = 425.0f;
+	auto mushroom_id = EntityID::MUSHROOM;
+	auto mushroom = make_unique<Entity>(x,y,mushroom_id);
+	CHECK(mushroom->isLive());
+	mushroom->destroy();
+	CHECK_FALSE(mushroom->isLive());
+}//12
 
+TEST_CASE("A correct entity id is returned"){
+	auto x = 325.0f;
+	auto y = 425.0f;
+	auto laser_id = EntityID::LASER;
+	auto laser = make_unique<Entity>(x,y,laser_id);
+	auto wrong_laser_id = EntityID::PLAYER;
+	CHECK(laser_id == laser->getEntityID());
+	CHECK_FALSE(laser_id == wrong_laser_id);
+	
+}//13
+
+TEST_CASE("EntityID is set correctly"){
+	auto x = 315.0f;
+	auto y = 250.0f;	
+	auto head_segment = EntityID::HEAD_SEGMENT;
+	Entity head(x,y,head_segment);
+	auto mid_segment = EntityID::MID_SEGMENT;
+	head.setEntityID(mid_segment);
+	CHECK(mid_segment == head.getEntityID());
+	
+}//14
+//**************************************************************************
+//**************************Mover Tests**************************************
+
+TEST_CASE("Speed cannot be less than or equal to zero"){
+	
+		auto x = 350.0f;
+		auto y = 300.0f;
+		auto negative_speed = -10.0f;
+		CHECK_THROWS_AS(Mover(x,y,negative_speed),NegativeZeroSpeed);
+		auto zero_speed = 0.0;
+		CHECK_THROWS_AS(Mover(x,y,zero_speed),NegativeZeroSpeed);
+}//15
+
+TEST_CASE("Mover can move left"){
+		auto x = 450.0f;
+		auto y = 100.0f;
+		auto speed = 4.0f;
+		auto mover = make_unique<Mover>(x,y,speed);
+		auto x_initial = mover->position()->getXPosition();
+		mover->moveLeft();
+		auto x_final = mover->position()->getXPosition();
+		CHECK(doctest::Approx(x_final) == (x-speed));
+		CHECK_FALSE(doctest::Approx(x_initial) == x_final);
+}//16
+
+TEST_CASE("Mover cannot left when at left border"){
+	auto x = 0.0f;
+	auto y = 100.0f;
+	auto speed = 5.0f;
+	auto mover = make_unique<Mover>(x,y,speed);
+	auto x_i = mover->position()->getXPosition();
+	mover->moveLeft();
+	auto x_f = mover->position()->getXPosition();
+	CHECK(doctest::Approx(x_i) == x_f);
+	
+}//17
+
+TEST_CASE("Mover can move right"){
+	auto x = 50.0f;
+	auto y = 100.0f;
+	auto speed = 4.0f;
+	auto mover = make_unique<Mover>(x,y,speed);
+	auto x_i = mover->position()->getXPosition();
+	mover->moveRight();
+	auto x_f = mover->position()->getXPosition();
+	CHECK(doctest::Approx(x_f) == (x_i+speed));	
+	CHECK_FALSE(doctest::Approx(x_i) == x_f);
+}//18
+
+TEST_CASE("Mover cannot move right when at rightmost screen border"){
+	auto x = 784.0f;
+	auto y = 150.0f;
+	auto speed = 4.0f;
+	auto mover = make_unique<Mover>(x,y,speed);
+	auto x_i = mover->position()->getXPosition();
+	mover->moveRight();
+	auto x_f = mover->position()->getXPosition();
+	CHECK(doctest::Approx(x_i) == (x_f));	
+
+}//19
+
+TEST_CASE("Mover can move down"){
+	auto x = 150.0f;
+	auto y = 350.0f;
+	auto speed = 4.0f;
+	auto mover = make_unique<Mover>(x,y,speed);
+	auto y_i = mover->position()->getYPosition();
+	mover->moveDown();
+	auto y_f = mover->position()->getYPosition();
+	CHECK(doctest::Approx(y_f) == (y_i+speed));	
+	CHECK_FALSE(doctest::Approx(y_i) == y_f);
+}//20
+
+TEST_CASE("Mover cannot move down when at the bottom of the screen"){
+	
+	auto x = 284.0f;
+	auto y = 584.0f;
+	auto speed = 4.0f;
+	auto mover = make_unique<Mover>(x,y,speed);
+	auto y_i = mover->position()->getYPosition();
+	mover->moveDown();
+	auto y_f = mover->position()->getYPosition();
+	CHECK(doctest::Approx(y_i) == (y_f));	
+
+}//21
+
+TEST_CASE("Mover can move up"){
+	auto x = 150.0f;
+	auto y = 550.0f;
+	auto speed = 4.0f;
+	auto mover = make_unique<Mover>(x,y,speed);
+	auto y_i = mover->position()->getYPosition();
+	mover->moveUp();
+	auto y_f = mover->position()->getYPosition();
+	CHECK(doctest::Approx(y_f) == (y_i-speed));	
+	CHECK_FALSE(doctest::Approx(y_i) == y_f);
+}//22
+
+TEST_CASE("Mover cannot move up after reaching a certain set limit"){
+	
+	auto x = 284.0f;
+	auto y = 450.0f;
+	auto speed = 4.0f;
+	auto mover = make_unique<Mover>(x,y,speed);
+	auto y_i = mover->position()->getYPosition();
+	mover->moveUp();
+	auto y_f = mover->position()->getYPosition();
+	CHECK(doctest::Approx(y_i) == (y_f));	
+
+}//23
 //****************************************************************************************
 //*****************************Player Tests*******************************************
 
@@ -430,17 +587,3 @@ TEST_CASE("Default position is origin"){
 ////TEST_CASE(""){
 ////        
 ////}
-
-
-
-
-
-
-
-
-
-
-
-
-
-

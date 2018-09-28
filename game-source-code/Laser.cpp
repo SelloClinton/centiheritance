@@ -1,6 +1,6 @@
 #include "Laser.h"
 
-Laser::Laser(float x_pos,float y_pos,EntityID id, int speed):
+Laser::Laser(float x_pos,float y_pos,EntityID id, float speed):
 		Entity(x_pos,y_pos,id)
 		,speed_(speed)
 {
@@ -15,7 +15,7 @@ void Laser::move(){
             destroy();
 }
 
-float getSpeed()const{
+float Laser::getSpeed()const{
 		return speed_;
 }
 

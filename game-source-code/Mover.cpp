@@ -7,29 +7,35 @@ Mover::Mover(float x_position, float y_position, float speed):
 	if (speed <=0)
 		throw NegativeZeroSpeed();
 }
-
+shared_ptr<Position> Mover::position(){
+		return position_;
+}
 void Mover::moveLeft(){
-	
 	auto x_position = position_->getXPosition();
-		if(auto x_left_limit = 4;x_position >= x_left_limit)
-			position_->setXPosition(x_position-getSpeed());
+	auto new_x_position = x_position-getSpeed();
+		if(auto x_left_limit = 0; new_x_position >= x_left_limit)
+			position_->setXPosition(new_x_position);
 }
 
 void Mover::moveRight(){
 	auto x_position = position_->getXPosition();
-		if(auto x_right_limit = 4; x_position >= x_right_limit)
-			position_->setXPosition(x_position-getSpeed());	
+	auto new_x_position = x_position+getSpeed();
+		if(auto x_right_limit = 784; new_x_position <= x_right_limit)
+			position_->setXPosition(new_x_position);
 }
 
 void Mover::moveUp(){
-		if(auto y_position = position_->getYPosition();  y_position >= Constants::PLAYER_VERTICAL_LIMIT_)
-			position_->setYPosition(y_position-getSpeed());	
+	auto y_position = position_->getYPosition();
+	auto new_y_position = y_position-getSpeed();
+		if(auto y_up_limit = Constants::PLAYER_VERTICAL_LIMIT_; new_y_position > y_up_limit)
+			position_->setYPosition(new_y_position);	
 }
 
 void Mover::moveDown(){
-	auto y_down_limit = 584;
-		if(auto y_position = position_->getYPosition();  y_position >= y_down_limit)
-			position_->setYPosition(y_position+getSpeed());
+	auto y_position = position_->getYPosition();
+	auto new_y_position = y_position+getSpeed();
+		if(auto y_down_limit = 584; new_y_position <= y_down_limit)
+			position_->setYPosition(new_y_position);
 }
 
 float Mover::getSpeed()const{

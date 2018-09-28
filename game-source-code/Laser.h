@@ -21,7 +21,7 @@ public:
         void move();
 private:
 		float speed_;
-		float getSpeed();
+		float getSpeed()const;
 };
 
 #endif

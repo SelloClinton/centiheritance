@@ -16,6 +16,7 @@ class Mover{
     
 public:
         Mover(float x_position, float y_position, float speed);
+		shared_ptr<Position> position();	//for testing purposes
         void moveLeft();
 		void moveRight();
 		void moveUp();
