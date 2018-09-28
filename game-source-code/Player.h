@@ -27,7 +27,6 @@ public:
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		float getSpeed()const;
 		void shoot();
 		void updateLaser();
 		Lasers& getLasers(); 
@@ -36,5 +35,6 @@ private:
 		Lasers lasers_;
 		float speed_;
 		Lasers::iterator lasers_iterator_;
+		float getSpeed()const;
 };
 #endif // PLAYER_H
