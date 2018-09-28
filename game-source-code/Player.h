@@ -22,17 +22,17 @@ using std::make_shared;
 class Player : public Entity {
 	
 public:
-		Player(float x_position, float y_position, EntityID id, int speed);
+		Player(float x_position, float y_position, EntityID id, float speed);
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		int getSpeed()const;
+		float getSpeed()const;
 		void shoot();
 		void updateBullet();
 //		Bullets& getBullets(){return bullets_;}
 private:
 //		Bullets bullets_;
-		int speed_;
+		float speed_;
 };
 #endif // PLAYER_H
