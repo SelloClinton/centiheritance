@@ -1,7 +1,7 @@
 #ifndef LASER_H
 #define LASER_H
 
-#include "Mover.h"
+//#include "Mover.h"
 #include "Constants.h"
 #include "Enums.h"
 #include "Entity.h"

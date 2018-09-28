@@ -3,7 +3,7 @@
 
 //#include "Mover.h"
 #include "Position.h"
-//#include "Laser.h"
+#include "Laser.h"
 #include "Constants.h"
 #include "Enums.h"
 #include "Entity.h"
@@ -17,7 +17,7 @@ using namespace std;
 using std::shared_ptr;
 using std::make_shared;
 
-//using Bullets = list<shared_ptr<Laser>>;
+using Lasers = list<shared_ptr<Laser>>;
 
 class Player : public Entity {
 	
@@ -29,10 +29,12 @@ public:
 		void moveRight();
 		float getSpeed()const;
 		void shoot();
-		void updateBullet();
-//		Bullets& getBullets(){return bullets_;}
+		void updateLaser();
+		Lasers& getLasers(); 
+		void updateLasersCapacity();
 private:
-//		Bullets bullets_;
+		Lasers lasers_;
 		float speed_;
+		Lasers::iterator lasers_iterator_;
 };
 #endif // PLAYER_H

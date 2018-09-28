@@ -4,7 +4,9 @@ Player::Player(float x_position, float y_position, EntityID id, float speed):
 		Entity(x_position, y_position,id)
 		,speed_(speed)
 {
-			
+	auto lasersSize = 5;
+	lasers_.resize(lasersSize);	
+	lasers_iterator_ = begin(lasers_);
 }
 		
 //shared_ptr<Mover> Player::attribute(){
@@ -19,7 +21,7 @@ void Player::moveUp(){
 	
 	
 //	for(auto i = 0; i != speed_; i++){
-		if(auto y_position = position()->getYPosition();y_position >= Constants::VERTICAL_PLAYER_LIMIT_)
+		if(auto y_position = position()->getYPosition();y_position >= Constants::PLAYER_VERTICAL_LIMIT_)
 			position()->setYPosition(y_position-getSpeed());
 //	}
 //		if(get<1>(attribute_->position()->getPosition()) > Constants::PLAYER_VERTICAL_LIMIT)
@@ -30,7 +32,7 @@ void Player::moveDown(){
 
 	auto y_limit = 584;
 //	for(auto i = 0; i != speed_; i++){
-//		if(	auto y_position = position()->getYPosition();  y_position <= y_limit)
+		if(	auto y_position = position()->getYPosition();  y_position <= y_limit)
 			position()->setYPosition(y_position+getSpeed());
 //	}
 //	attribute_->move(Direction::DOWN);
@@ -59,17 +61,27 @@ void Player::moveRight(){
 float Player::getSpeed()const{
 		return speed_;
 }
-//void Player::shoot(){
-//    auto[x_position,y_position] = attribute_->position()->getPosition();
-//    auto bullet_position = make_shared<Position>(x_position+(Constants::PLAYER_WIDTH_),y_position-(Constants::PLAYER_HEIGHT_));
-//    auto bullet_mover = make_shared<Mover>(bullet_position,Constants::BULLET_SPEED_);
-//    auto bullet = make_shared<Bullet>(bullet_mover);
-//    bullets_.push_back(bullet);
-//}
+void Player::shoot(){
+	
+	if (lasers_iterator_ != end(lasers_)){
+       auto[x_position,y_position] = position()->getXYPosition();
+	   auto laser = make_shared<Laser>(x_position,y_position,EntityID::LASER,Constants::LASER_SPEED_);
+		lasers_.insert(lasers_iterator_,laser);
+		lasers_iterator_++;
+	}
+}
 
-//void Player::updateBullet(){
-//	
-//    for(auto& bullet:bullets_){
-//        bullet->move();
-//    }
-//}
+void Player::updateLaser(){
+	
+    for(auto& laser:lasers_){
+        laser->move();
+    }
+}
+
+Lasers& Player::getLasers(){
+		return lasers_;
+}
+
+void Player::updateLasersCapacity(){
+	--lasers_iterator_;	
+}
