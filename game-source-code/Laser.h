@@ -17,11 +17,11 @@ using std::get;
 class Laser : public Entity{
 	
 public:
-		Laser(float x_pos, float y_pos, EntityID id, int speed);
+		Laser(float x_pos, float y_pos, EntityID id, float speed);
         void move();
 private:
-		int speed_;
-		int getSpeed();
+		float speed_;
+		float getSpeed();
 };
 
 #endif

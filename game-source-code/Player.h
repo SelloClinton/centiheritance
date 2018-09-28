@@ -8,6 +8,7 @@
 #include "Enums.h"
 #include "Entity.h"
 
+#include <cassert>
 #include <tuple>
 using std::tuple;
 #include <list>

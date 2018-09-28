@@ -15,3 +15,7 @@ void Laser::move(){
             destroy();
 }
 
+float getSpeed()const{
+		return speed_;
+}
+
