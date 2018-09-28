@@ -13,11 +13,11 @@ tuple<float,float> Position::getXYPosition()const{
 		return{x_position_,y_position_};
 }
 
-float Position::getXPosition()const{
+float Position::getXPosition(){
 		return x_position_;
 }
 
-float Position::getYPosition()const{
+float Position::getYPosition(){
 		return y_position_;
 }
 void Position::setXYPosition(float x, float y){

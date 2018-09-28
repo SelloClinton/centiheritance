@@ -11,7 +11,7 @@ using std::make_shared;
 class Entity{
 public:
 	Entity(float x_position, float y_position,EntityID id);
-	shared_ptr<Position> position();
+	shared_ptr<Position>& position();
 	bool isLive()const;
 	void destroy();
 	EntityID getEntityID()const;

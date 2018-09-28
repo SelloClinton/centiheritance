@@ -13,8 +13,8 @@ class Position{
 public:
 	Position(float x_position = 0, float y_position = 0); 
 	tuple<float,float>getXYPosition()const;
-	float getXPosition()const;
-	float getYPosition()const;
+	float getXPosition();
+	float getYPosition();
 	void setXYPosition(float x, float y);
 	void setXPosition(float x);
 	void setYPosition(float y);

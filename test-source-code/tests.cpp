@@ -4,8 +4,8 @@
 #include "../game-source-code/Entity.h"
 #include "../game-source-code/Enums.h"
 #include "../game-source-code/Mover.h"
-//#include "../game-source/Centipede.h"
-
+#include "../game-source-code/Player.h"
+#include "../game-source-code/Constants.h"
 
 
 #include <memory>
@@ -272,7 +272,196 @@ TEST_CASE("Mover cannot move up after reaching a certain set limit"){
 }//23
 //****************************************************************************************
 //*****************************Player Tests*******************************************
+TEST_CASE("Player can move left"){
+	auto player_x_position = 400.0f;
+	auto player_y_position = 580.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto x_initial = player->position()->getXPosition();
+	
+	player->move(Direction::LEFT);
 
+	auto x_final = player->position()->getXPosition();
+	
+	
+	CHECK(doctest::Approx(x_final) == (x_initial-player_speed));
+	CHECK_FALSE(doctest::Approx(x_initial) == x_final);
+}//24
+
+TEST_CASE("Player cannot move left when at left screen border"){
+	auto player_x_position = 0.0f;
+	auto player_y_position = 580.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto x_initial = player->position()->getXPosition();
+	
+	player->move(Direction::LEFT);
+
+	auto x_final = player->position()->getXPosition();
+	
+	
+	CHECK(doctest::Approx(x_final) == (x_initial));
+		
+}//25
+
+TEST_CASE("Player can move right"){
+	auto player_x_position = 400.0f;
+	auto player_y_position = 580.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto x_initial = player->position()->getXPosition();
+	
+	player->move(Direction::RIGHT);
+
+	auto x_final = player->position()->getXPosition();
+	
+	
+	CHECK(doctest::Approx(x_final) == (x_initial+player_speed));
+	CHECK_FALSE(doctest::Approx(x_initial) == x_final);
+}//26
+
+TEST_CASE("Player cannot move right when at right screen border"){
+	auto player_x_position = 784.0f;
+	auto player_y_position = 580.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto x_initial = player->position()->getXPosition();
+	
+	player->move(Direction::RIGHT);
+
+	auto x_final = player->position()->getXPosition();
+	
+	
+	CHECK(doctest::Approx(x_final) == (x_initial));
+		
+}//27
+
+TEST_CASE("Player can move up"){
+	auto player_x_position = 400.0f;
+	auto player_y_position = 580.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto y_initial = player->position()->getYPosition();
+	
+	player->move(Direction::UP);
+
+	auto y_final = player->position()->getYPosition();
+	
+	
+	CHECK(doctest::Approx(y_final) == (y_initial-player_speed));
+	CHECK_FALSE(doctest::Approx(y_initial) == y_final);
+}//28
+
+TEST_CASE("Player cannot move up when at right screen border"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 450.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto y_initial = player->position()->getYPosition();
+	
+	player->move(Direction::UP);
+
+	auto y_final = player->position()->getYPosition();
+	
+	
+	CHECK(doctest::Approx(y_final) == (y_initial));
+		
+}//29
+
+TEST_CASE("Player can move down"){
+	auto player_x_position = 400.0f;
+	auto player_y_position = 350.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto y_initial = player->position()->getYPosition();
+	
+	player->move(Direction::DOWN);
+
+	auto y_final = player->position()->getYPosition();
+	
+	
+	CHECK(doctest::Approx(y_final) == (y_initial+player_speed));
+	CHECK_FALSE(doctest::Approx(y_initial) == y_final);
+}//30
+
+TEST_CASE("Player cannot move up when at right screen border"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto y_initial = player->position()->getYPosition();
+	
+	player->move(Direction::DOWN);
+
+	auto y_final = player->position()->getYPosition();
+	
+	
+	CHECK(doctest::Approx(y_final) == (y_initial));
+		
+}//31
+
+TEST_CASE("Lasers container is initialy empty"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	auto initial_size = player->getLasers().size();
+	auto size = 0;
+	CHECK(initial_size == size);
+	
+}//32
+
+TEST_CASE("Player's shoot function populates Lasers container"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);	
+	
+	auto initial_size = player->getLasers().size();
+	player->shoot();
+	auto final_size = player->getLasers().size();
+	auto empty_size = 0;
+	auto loaded_size = 1;
+	CHECK(initial_size == empty_size);
+	CHECK(final_size == loaded_size);
+	CHECK_FALSE(initial_size == final_size);
+	
+}//33
+
+TEST_CASE("Player cannot shoot more than five bullets at a time"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+
+	for(auto i = 0; i != 15; i++)
+		player->shoot();
+	auto real_size = 5;
+	auto false_size = 16;
+	auto shot_size = player->getLasers().size();
+	CHECK(real_size == shot_size);
+	CHECK_FALSE(shot_size == false_size);
+}//34
 //*************************************************************************************
 ////**************************Mover tests********************************************
 //TEST_CASE("Speed cannot be less than or equal to zero"){

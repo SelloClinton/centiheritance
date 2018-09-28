@@ -17,6 +17,5 @@ public:
 		void weaken();
 private:
 		int number_of_lives;
-		float speed_;
 };
 #endif

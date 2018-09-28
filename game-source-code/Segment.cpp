@@ -14,21 +14,25 @@ void Segment::move(Direction direction){
 		switch(direction){
 			case Direction::RIGHT:
 				mover_->moveRight();
+				position()->setXPosition(mover_->position()->getXPosition());
 				break;
 			case Direction::LEFT:
 				mover_->moveLeft();
+				position()->setXPosition(mover_->position()->getXPosition());
 				break;
 			case Direction::UP:
 				mover_->moveUp();
 				mover_->moveUp();
 				mover_->moveUp();
 				mover_->moveUp();
+				position()->setYPosition(mover_->position()->getYPosition());
 				break;
 			case Direction::DOWN:
 				mover_->moveDown();
 				mover_->moveDown();
 				mover_->moveDown();
 				mover_->moveDown();
+				position()->setYPosition(mover_->position()->getYPosition());
 			default:
 				assert(false);
 		}
