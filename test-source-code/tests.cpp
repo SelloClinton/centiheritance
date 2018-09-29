@@ -6,6 +6,7 @@
 #include "../game-source-code/Mover.h"
 #include "../game-source-code/Player.h"
 #include "../game-source-code/Constants.h"
+#include "../game-source-code/Mushroom.h"
 
 
 #include <memory>
@@ -124,7 +125,7 @@ TEST_CASE("position returns expcted results"){
 TEST_CASE("islive returns correct state"){
 	auto x = 150.0f;
 	auto y = 425.0f;
-	auto segment_id = EntityID::HEAD_SEGMENT;
+	auto segment_id = EntityID::HEAD_SEGMENT_FACING_RIGHT;
 	auto entity = make_unique<Entity>(x,y,segment_id);
 	CHECK(entity->isLive());
 }//11
@@ -132,7 +133,7 @@ TEST_CASE("islive returns correct state"){
 TEST_CASE("an entity can be destroyed"){
 	auto x = 150.0f;
 	auto y = 425.0f;
-	auto mushroom_id = EntityID::MUSHROOM;
+	auto mushroom_id = EntityID::STRONG_MUSHROOM;
 	auto mushroom = make_unique<Entity>(x,y,mushroom_id);
 	CHECK(mushroom->isLive());
 	mushroom->destroy();
@@ -153,9 +154,9 @@ TEST_CASE("A correct entity id is returned"){
 TEST_CASE("EntityID is set correctly"){
 	auto x = 315.0f;
 	auto y = 250.0f;	
-	auto head_segment = EntityID::HEAD_SEGMENT;
+	auto head_segment = EntityID::HEAD_SEGMENT_FACING_DOWN;
 	Entity head(x,y,head_segment);
-	auto mid_segment = EntityID::MID_SEGMENT;
+	auto mid_segment = EntityID::MID_SEGMENT_FACING_RIGHT;
 	head.setEntityID(mid_segment);
 	CHECK(mid_segment == head.getEntityID());
 	
@@ -369,6 +370,103 @@ TEST_CASE("Parent instance substitute returns correct EntityID"){
 	CHECK(returned_laser_entityID == parent_laser_id);
 	
 }//48
+//***********************************************************************************
+
+//*****************************Mushroom Tests****************************************
+TEST_CASE("Mushroom dies after being weakened four times"){
+	auto mushroom_x_position = 320.0f;
+	auto mushroom_y_position = 250.0f;
+	auto mushroom_entity = EntityID::STRONG_MUSHROOM;
+	auto mushroom = make_shared<Mushroom>(mushroom_x_position,mushroom_y_position,mushroom_entity);
+	
+	auto hits = 4;
+	for(auto i = 0; i != hits; i++)
+		mushroom->weaken();
+	CHECK_FALSE(mushroom->isLive());
+	
+}//49
+
+TEST_CASE("Mushroom does not die if hit less than four times"){
+	auto mushroom_x_position = 320.0f;
+	auto mushroom_y_position = 250.0f;
+	auto mushroom_entity = EntityID::STRONG_MUSHROOM;
+	auto mushroom = make_shared<Mushroom>(mushroom_x_position,mushroom_y_position,mushroom_entity);
+
+	mushroom->weaken();
+	mushroom->weaken();
+	mushroom->weaken();
+	
+	auto dead = false;
+	auto mushroom_state = mushroom->isLive();
+	CHECK_FALSE(mushroom_state == dead);
+}//50
+TEST_CASE("Mushroom's health changes when being weakened"){
+	auto mushroom_x_position = 320.0f;
+	auto mushroom_y_position = 250.0f;
+	auto mushroom_entity = EntityID::STRONG_MUSHROOM;
+	auto mushroom = make_shared<Mushroom>(mushroom_x_position,mushroom_y_position,mushroom_entity);
+
+	CHECK(mushroom_entity == mushroom->getEntityID());
+	mushroom->weaken();
+	auto mushroom_health = EntityID::WEAK_MUSHROOM;
+	CHECK(mushroom_health == mushroom->getEntityID());
+	mushroom->weaken();
+	mushroom_health = EntityID::WEAKER_MUSHROOM;
+	CHECK(mushroom_health == mushroom->getEntityID());
+	mushroom->weaken();
+	mushroom_health = EntityID::WEAKEST_MUSHROOM;
+	CHECK(mushroom_health == mushroom->getEntityID());
+}//51
+
+TEST_CASE("Mushroom's health does not change when it's not weakened"){
+	auto mushroom_x_position = 320.0f;
+	auto mushroom_y_position = 250.0f;
+	auto mushroom_entity = EntityID::STRONG_MUSHROOM;
+	auto mushroom = make_shared<Mushroom>(mushroom_x_position,mushroom_y_position,mushroom_entity);
+	
+	auto mushroom_health = EntityID::WEAK_MUSHROOM;
+	CHECK_FALSE(mushroom_health == mushroom->getEntityID());
+	mushroom_health = EntityID::WEAKER_MUSHROOM;
+	CHECK_FALSE(mushroom_health == mushroom->getEntityID());
+	
+}//52
+
+TEST_CASE("Parent instance substitute of Mushroom returns correct position"){
+	auto mushroom_x_position = 320.0f;
+	auto mushroom_y_position = 250.0f;
+	auto mushroom_entity = EntityID::STRONG_MUSHROOM;
+	auto mushroom = make_shared<Mushroom>(mushroom_x_position,mushroom_y_position,mushroom_entity);
+
+	shared_ptr<Entity>parent_mushroom = mushroom;
+	
+	auto[mush_x,mush_y] = mushroom->position()->getXYPosition();
+	auto[parent_x,parent_y] = parent_mushroom->position()->getXYPosition();
+	
+	CHECK(doctest::Approx(mush_x) == parent_x);
+	CHECK(doctest::Approx(mush_y) == parent_y);
+
+}//53
+TEST_CASE("Parent instance substitute of Mushroom returns correct life state"){
+	auto mushroom_x_position = 320.0f;
+	auto mushroom_y_position = 250.0f;
+	auto mushroom_entity = EntityID::STRONG_MUSHROOM;
+	auto mushroom = make_shared<Mushroom>(mushroom_x_position,mushroom_y_position,mushroom_entity);
+	mushroom->destroy();
+	shared_ptr<Entity>parent_mushroom = mushroom;
+	CHECK(parent_mushroom->isLive() == mushroom->isLive());
+}//54
+TEST_CASE("parent substitue of mushroom returns correct entity ID"){
+	auto mushroom_x_position = 320.0f;
+	auto mushroom_y_position = 250.0f;
+	auto mushroom_entity = EntityID::STRONG_MUSHROOM;
+	auto mushroom = make_shared<Mushroom>(mushroom_x_position,mushroom_y_position,mushroom_entity);
+	shared_ptr<Entity>parent_mushroom = mushroom;
+
+	CHECK(parent_mushroom->getEntityID() == mushroom->getEntityID());
+	auto wrong_entity = EntityID::WEAK_MUSHROOM;
+	CHECK_FALSE(wrong_entity == parent_mushroom->getEntityID());
+}//55
+
 //***********************************************************************************
 //*****************************Player Tests*******************************************
 TEST_CASE("Player can move left"){

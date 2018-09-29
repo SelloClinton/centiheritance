@@ -13,9 +13,10 @@ using std::make_shared;
 class Mushroom : public Entity{
 
 public:	
-		Mushroom(float x_pos, float y_pos, EntityID id, float speed);
+		Mushroom(float x_pos, float y_pos, EntityID id);
 		void weaken();
 private:
 		int number_of_lives;
+		
 };
 #endif
