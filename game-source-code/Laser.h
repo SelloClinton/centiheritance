@@ -13,6 +13,7 @@ using std::make_shared;
 using std::get;
 
 
+class NegativeZeroLaserSpeed{};
 
 class Laser : public Entity{
 	

@@ -4,6 +4,8 @@ Laser::Laser(float x_pos,float y_pos,EntityID id, float speed):
 		Entity(x_pos,y_pos,id)
 		,speed_(speed)
 {
+	if (speed <= 0)
+		throw NegativeZeroLaserSpeed();
 }
 		
 
@@ -16,6 +18,6 @@ void Laser::move(){
 }
 
 float Laser::getSpeed()const{
-		return speed_;
+	return speed_;
 }
 

@@ -272,9 +272,103 @@ TEST_CASE("Mover cannot move up after reaching a certain set limit"){
 }//23
 //***********************************************************************************
 //*****************************Laser Tests*******************************************
+TEST_CASE("Laser cannot have speed <= 0"){
+	CHECK_THROWS_AS(Laser(250,550,EntityID::LASER,0),NegativeZeroLaserSpeed);
+	CHECK_THROWS_AS(Laser(350,495,EntityID::LASER,-4.0),NegativeZeroLaserSpeed);
+}//41
+TEST_CASE("Laser can move up"){
+	auto laser_x_position = 350.0f;
+	auto laser_y_position = 550.0f;
+	auto laser_entityID = EntityID::LASER;
+	auto laser_speed = 4.0f;
+	auto laser = make_unique<Laser>(laser_x_position,laser_y_position,laser_entityID,laser_speed);
+	
+	laser->move();
+	auto returned_y_f = laser->position()->getYPosition();
+	auto y_f = laser_y_position-laser_speed;
+	
+	CHECK(doctest::Approx(returned_y_f) == y_f);
+}//42
+TEST_CASE("only y-coordinate of Laser changes when it moves"){
+	auto laser_x_position = 350.0f;
+	auto laser_y_position = 550.0f;
+	auto laser_entityID = EntityID::LASER;
+	auto laser_speed = 4.0f;
+	auto laser = make_unique<Laser>(laser_x_position,laser_y_position,laser_entityID,laser_speed);
+	
+	
+	auto x_i = laser->position()->getXPosition();
+	laser->move();
+	auto x_f = laser->position()->getXPosition();
+	auto false_x_f = x_i+laser_speed;
+	auto false_x_f_2 = x_i-laser_speed;
+	
+	CHECK(doctest::Approx(x_i) == x_f);
+	CHECK_FALSE(doctest::Approx(x_f) == false_x_f);
+	CHECK_FALSE(doctest::Approx(x_f) == false_x_f_2);
+	
+	
+}//43
+TEST_CASE("Laser cannot move beyond screen borders"){
+	auto laser_x_position = 350.0f;
+	auto laser_y_position = 7.0f; //set border
+	auto laser_entityID = EntityID::LASER;
+	auto laser_speed = 4.0f;
+	auto laser = make_unique<Laser>(laser_x_position,laser_y_position,laser_entityID,laser_speed);	
+	auto laser_y_i = laser->position()->getYPosition();
+	laser->move();
+	auto laser_y_f = laser->position()->getYPosition();
+	CHECK(doctest::Approx(laser_y_i) == laser_y_f);
+}//44
+TEST_CASE("Laser gets destroyed when it goes out of bound"){
+	auto laser_x_position = 350.0f;
+	auto laser_y_position = 7.0f;
+	auto laser_entityID = EntityID::LASER;
+	auto laser_speed = 4.0f;
+	auto laser = make_unique<Laser>(laser_x_position,laser_y_position,laser_entityID,laser_speed);	
+	CHECK(laser->isLive());
+	laser->move();
+	CHECK_FALSE(laser->isLive());
+}//45
+TEST_CASE("Correct Position is returned when Laser is subtituted with Entity instance"){
+	auto laser_x_position = 350.0f;
+	auto laser_y_position = 550.0f;
+	auto laser_entityID = EntityID::LASER;
+	auto laser_speed = 4.0f;
+	auto laser = make_shared<Laser>(laser_x_position,laser_y_position,laser_entityID,laser_speed);
 
-
-
+	auto[laser_x,laser_y] = laser->position()->getXYPosition();
+	shared_ptr<Entity>parent_laser = laser;
+	auto[parent_x,parent_y] = parent_laser->position()->getXYPosition();
+	CHECK(doctest::Approx(laser_x) == parent_x);
+	CHECK(doctest::Approx(laser_y) == parent_y);
+}//46
+TEST_CASE("Parent instance subtitute returns correct life state"){
+	auto laser_x_position = 350.0f;
+	auto laser_y_position = 550.0f;
+	auto laser_entityID = EntityID::LASER;
+	auto laser_speed = 4.0f;
+	auto laser = make_shared<Laser>(laser_x_position,laser_y_position,laser_entityID,laser_speed);
+	
+	laser->destroy();
+	shared_ptr<Entity>parent_laser = laser;
+	auto laser_life = laser->isLive();
+	auto parent_life = parent_laser->isLive();
+	CHECK(laser_life == parent_life);
+}//47
+TEST_CASE("Parent instance substitute returns correct EntityID"){
+	auto laser_x_position = 350.0f;
+	auto laser_y_position = 550.0f;
+	auto laser_entityID = EntityID::LASER;
+	auto laser_speed = 4.0f;
+	auto laser = make_shared<Laser>(laser_x_position,laser_y_position,laser_entityID,laser_speed);
+	shared_ptr<Entity>parent_laser = laser;
+	
+	auto returned_laser_entityID = laser->getEntityID();
+	auto parent_laser_id = parent_laser->getEntityID();
+	CHECK(returned_laser_entityID == parent_laser_id);
+	
+}//48
 //***********************************************************************************
 //*****************************Player Tests*******************************************
 TEST_CASE("Player can move left"){
@@ -467,7 +561,7 @@ TEST_CASE("Player cannot shoot more than five bullets at a time"){
 	CHECK(real_size == shot_size);
 	CHECK_FALSE(shot_size == false_size);
 }//34
-TEST_CASE("Lasers container returns correct number of lasers"){
+TEST_CASE("Player's Lasers container returns correct number of lasers"){
 	auto player_x_position = 300.0f;
 	auto player_y_position = 584.0f;
 	auto player_speed = 5.0f;
@@ -481,7 +575,7 @@ TEST_CASE("Lasers container returns correct number of lasers"){
 	CHECK(lasers == size);
 		
 }//35
-TEST_CASE("Lasers container does not return incorrect number of lasers"){
+TEST_CASE("Player's Lasers container does not return incorrect number of lasers"){
 	auto player_x_position = 300.0f;
 	auto player_y_position = 584.0f;
 	auto player_speed = 5.0f;
@@ -511,9 +605,46 @@ TEST_CASE("a Shot laser can move"){
 	auto laser_y_final = (*laser_iterator)->position()->getYPosition();
 	auto laser_speed = 4.0;
 	auto y_f = y_i-laser_speed;
-	CHECK(laser_y_final == y_f);
+	CHECK(doctest::Approx(laser_y_final) == y_f);
 	
 }//37
+
+TEST_CASE("Correct Position is returned when player is substituted with Parent class instance"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_shared<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	shared_ptr<Entity>parent_player = player;
+	auto[x_i,y_i] = player->position()->getXYPosition();
+	auto[parent_x_position,parent_y_position] = parent_player->position()->getXYPosition();
+	CHECK(doctest::Approx(x_i) == parent_x_position);
+	CHECK(doctest::Approx(y_i) == parent_y_position);
+}//38
+
+TEST_CASE("Correct EntityID is returned when Player is substituted with parent class instance"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_shared<Player>(player_x_position,player_y_position,player_entity,player_speed);	
+	shared_ptr<Entity>parent_player = player;
+	auto parent_entityID = parent_player->getEntityID();
+	auto returned_player_entityID = player->getEntityID();
+	CHECK(parent_entityID == returned_player_entityID);
+	
+}//39
+TEST_CASE("Correct life state is returned when Player is substituted with parent class instance"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_shared<Player>(player_x_position,player_y_position,player_entity,player_speed);	
+	shared_ptr<Entity>parent_player = player;
+	auto parent_life = parent_player->isLive();
+	auto returned_player_life = player->isLive();
+	CHECK(parent_life == returned_player_life);
+}//40
 //*************************************************************************************
 ////**************************Mover tests********************************************
 //TEST_CASE("Speed cannot be less than or equal to zero"){
