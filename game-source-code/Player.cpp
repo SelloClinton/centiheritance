@@ -40,7 +40,7 @@ void Player::shoot(){
 	auto lasers_max_size = 5;
 	if (lasers_.size() < lasers_max_size){
        auto[x_position,y_position] = position()->getXYPosition();
-	   auto laser = make_shared<Laser>(x_position,y_position,EntityID::LASER,Constants::LASER_SPEED_);
+	   auto laser = make_shared<Laser>(x_position+Constants::PLAYER_WIDTH_,y_position-Constants::PLAYER_HEIGHT_,EntityID::LASER,Constants::LASER_SPEED_);
 	   lasers_.push_back(laser);
 //		lasers_.insert(lasers_iterator_,laser);
 //		lasers_iterator_++;

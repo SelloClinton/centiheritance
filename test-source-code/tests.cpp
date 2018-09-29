@@ -270,7 +270,12 @@ TEST_CASE("Mover cannot move up after reaching a certain set limit"){
 	CHECK(doctest::Approx(y_i) == (y_f));	
 
 }//23
-//****************************************************************************************
+//***********************************************************************************
+//*****************************Laser Tests*******************************************
+
+
+
+//***********************************************************************************
 //*****************************Player Tests*******************************************
 TEST_CASE("Player can move left"){
 	auto player_x_position = 400.0f;
@@ -462,6 +467,53 @@ TEST_CASE("Player cannot shoot more than five bullets at a time"){
 	CHECK(real_size == shot_size);
 	CHECK_FALSE(shot_size == false_size);
 }//34
+TEST_CASE("Lasers container returns correct number of lasers"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	player->shoot();
+	player->shoot();
+	player->shoot();
+	auto size = 3;
+	auto lasers = player->getLasers().size();
+	CHECK(lasers == size);
+		
+}//35
+TEST_CASE("Lasers container does not return incorrect number of lasers"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	player->shoot();
+	auto false_size = 5;
+	auto lasers_size = player->getLasers().size();
+	CHECK_FALSE(lasers_size == false_size);
+	
+}//36
+
+TEST_CASE("a Shot laser can move"){
+	auto player_x_position = 300.0f;
+	auto player_y_position = 584.0f;
+	auto player_speed = 5.0f;
+	auto player_entity = EntityID::PLAYER;
+	auto player = make_unique<Player>(player_x_position,player_y_position,player_entity,player_speed);
+	
+	player->shoot();
+	auto laser_iterator = begin(player->getLasers());
+	auto laser_y_initial = (*laser_iterator)->position()->getYPosition();
+	auto y_i = player_y_position-Constants::PLAYER_HEIGHT_;
+	CHECK(laser_y_initial == y_i);
+	player->updateLasers();
+	auto laser_y_final = (*laser_iterator)->position()->getYPosition();
+	auto laser_speed = 4.0;
+	auto y_f = y_i-laser_speed;
+	CHECK(laser_y_final == y_f);
+	
+}//37
 //*************************************************************************************
 ////**************************Mover tests********************************************
 //TEST_CASE("Speed cannot be less than or equal to zero"){

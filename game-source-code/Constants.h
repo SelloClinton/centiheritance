@@ -7,8 +7,8 @@ class Constants{
 		static const float DISPLAY_HEIGHT_;
 		static const float LASER_WIDTH_;
 		static const float LASER_HEIGHT_;
-//		static const int PLAYER_WIDTH_;
-//		static const int PLAYER_HEIGHT_;
+		static const float PLAYER_WIDTH_;
+		static const float PLAYER_HEIGHT_;
 //        static const int PLAYER_SPEED_;
 		static const float PLAYER_VERTICAL_LIMIT_;
         static const float LASER_SPEED_;
