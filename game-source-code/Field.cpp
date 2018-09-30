@@ -62,7 +62,7 @@ void Field::generateYPositions(int numberOfMushrooms){
 			if ((random_multiple_of_16%4 == 0)&&(random_multiple_of_16 >=32)){
 				yPositions_.push_back(random_multiple_of_16);
 				valid_y_positions++;	
-		}
+			}
 	}
 }
 

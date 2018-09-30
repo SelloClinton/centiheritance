@@ -34,7 +34,5 @@ private:
 	void generateXPositions(int numberOfMushrooms);
 	void generateYPositions(int numberOfMushrooms);
 	void createPositions();
-	
-		
 };
 #endif

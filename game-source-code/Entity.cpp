@@ -6,7 +6,7 @@ Entity::Entity(float x_position, float y_position,EntityID id):
 		,live_(true)
 		{}
 		
-shared_ptr<Position>& Entity::position(){
+shared_ptr<Position> Entity::position(){
 		return position_;
 }
 
