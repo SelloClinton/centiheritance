@@ -1,10 +1,10 @@
 #include "MushroomDrawable.h"
 
-MushroomDrawable::MushroomDrawable(const EntityID drawableID):
+MushroomDrawable::MushroomDrawable(const EntityID& drawableID):
 				Drawable(drawableID)
 				{}
 				
-void MushroomDrawable::createDrawable()override{
+void MushroomDrawable::createDrawable(){
 	
 	switch(drawable_id_){
 			case EntityID::STRONG_MUSHROOM:
@@ -17,7 +17,7 @@ void MushroomDrawable::createDrawable()override{
 				sprite_->setTextureRect(sf::IntRect(86,72,8,8));
 				break;
 			case EntityID::WEAKEST_MUSHROOM:
-				sprite_->setTexture(sf::IntRect(95,72,8,8));
+				sprite_->setTextureRect(sf::IntRect(95,72,8,8));
 				break;
 			default:
 				assert(false);

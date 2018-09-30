@@ -3,10 +3,12 @@
 
 #include "Drawable.h"
 
+#include <cassert>
+
 class MushroomDrawable : public Drawable{
 public:
 	MushroomDrawable(const EntityID& drawableID);
-	virtual void createDrawable()override;
+	virtual void createDrawable();
 private:
 };
 #endif
