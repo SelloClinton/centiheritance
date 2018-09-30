@@ -20,12 +20,12 @@ using Drawables = list<shared_ptr<Drawable>>;
 class DrawablesLoader{
 	
 public:
-	DrawablesLoader(list<shared_ptr<Entity>> entities,int numberOfDrawables);
+	DrawablesLoader(list<shared_ptr<Entity>>& entities,int numberOfDrawables);
 	Drawables& loadDrawables();
 private:
 	int number_of_drawables_;
 	Drawables drawables_;
-	void initiateDrawables(list<shared_ptr<Entity>> entities);
+	void initiateDrawables(list<shared_ptr<Entity>>& entities);
 	void inititePlayerDrawable(list<shared_ptr<Entity>>::iterator, const EntityID& drawable_id);
 	void inititeLaserDrawable(list<shared_ptr<Entity>>::iterator, const EntityID& drawable_id);
 	void initiateSegmentDrawable(list<shared_ptr<Entity>>::iterator, const EntityID& drawable_id);

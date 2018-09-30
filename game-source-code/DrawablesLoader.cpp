@@ -1,6 +1,6 @@
 #include "DrawablesLoader.h"
 
-DrawablesLoader::DrawablesLoader(list<shared_ptr<Entity>> entities, int numberOfDrawables)
+DrawablesLoader::DrawablesLoader(list<shared_ptr<Entity>>& entities, int numberOfDrawables)
 
 {
 	drawables_.resize(numberOfDrawables);
@@ -11,7 +11,7 @@ Drawables& DrawablesLoader::loadDrawables(){
 	return drawables_;
 }
 
-void DrawablesLoader::initiateDrawables(list<shared_ptr<Entity>> entities){
+void DrawablesLoader::initiateDrawables(list<shared_ptr<Entity>>& entities){
 	
 	auto entities_iterator = begin(entities);
 	
