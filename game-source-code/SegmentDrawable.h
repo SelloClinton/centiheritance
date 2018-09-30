@@ -3,10 +3,12 @@
 
 #include "Drawable.h"
 
+#include <cassert>
+
 class SegmentDrawable : public Drawable{
 public:
 	SegmentDrawable(const EntityID& drawableID);
-	virtual void createDrawable()override;
+	virtual void createDrawable();
 private:
 	
 };

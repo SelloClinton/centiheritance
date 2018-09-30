@@ -4,8 +4,8 @@ SegmentDrawable::SegmentDrawable(const EntityID& drawableID):
 				Drawable(drawableID)
 				{}
 				
-virtual void SegmentDrawable::createDrawable()override{
-		switch(drawable_id){
+void SegmentDrawable::createDrawable(){
+		switch(drawable_id_){
 			case EntityID::HEAD_SEGMENT_FACING_RIGHT:
 				sprite_->setTextureRect(sf::IntRect(4,18,8,8));
 				sprite_->setRotation(180);
@@ -22,7 +22,7 @@ virtual void SegmentDrawable::createDrawable()override{
 				break;
 			case EntityID::MID_SEGMENT_FACING_RIGHT:
 				sprite_->setTextureRect(sf::IntRect(4,36,8,8));
-				sprite_->setRotatation(180);
+				sprite_->setRotation(180);
 				break;
 			case EntityID::MID_SEGMENT_FACING_LEFT:
 				sprite_->setTextureRect(sf::IntRect(4,36,8,8));
