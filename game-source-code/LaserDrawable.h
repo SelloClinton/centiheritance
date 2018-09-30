@@ -6,7 +6,7 @@
 class LaserDrawable : public Drawable{
 public:
 	LaserDrawable(const EntityID& drawableID);
-	virtual void createDrawable()override;
+	virtual void createDrawable();
 private:	
 };
 #endif
