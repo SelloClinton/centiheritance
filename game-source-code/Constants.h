@@ -14,7 +14,7 @@ class Constants{
         static const float LASER_SPEED_;
 //        static const int SEGMENT_SPEED_;
 //        static const int INITIAL_SIZE_OF_CENTIPEDE_;
-//		static const int NUMBER_OF_MUSHROOMS;
+		static const int NUMBER_OF_MUSHROOMS;
 };
 
 #endif
