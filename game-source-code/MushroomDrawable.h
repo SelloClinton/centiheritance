@@ -9,7 +9,6 @@ class MushroomDrawable : public Drawable{
 public:
 	MushroomDrawable(const EntityID& drawableID);
 	virtual void createDrawable();
-	virtual ~MushroomDrawable();
 private:
 };
 #endif
