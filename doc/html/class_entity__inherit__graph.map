@@ -1,0 +1,6 @@
+<map id="Entity" name="Entity">
+<area shape="rect" id="node2" href="$class_laser.html" title="{Laser\n||+ Laser()\l+ move()\l}" alt="" coords="5,277,80,369"/>
+<area shape="rect" id="node3" href="$class_mushroom.html" title="{Mushroom\n||+ Mushroom()\l+ weaken()\l}" alt="" coords="105,277,207,369"/>
+<area shape="rect" id="node4" href="$class_player.html" title="{Player\n||+ Player()\l+ move()\l+ shoot()\l+ updateLasers()\l+ getLasers()\l}" alt="" coords="232,255,352,391"/>
+<area shape="rect" id="node5" href="$class_segment.html" title="{Segment\n||+ Segment()\l+ move()\l+ faceLeft()\l+ faceRight()\l+ faceDown()\l+ faceUp()\l+ isFacingLeft()\l+ isFacingRight()\l+ isFacingDown()\l+ isFacingUp()\l}" alt="" coords="376,219,499,428"/>
+</map>

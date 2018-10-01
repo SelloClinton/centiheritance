@@ -1,0 +1,4 @@
+<map id="Mushroom::weaken" name="Mushroom::weaken">
+<area shape="rect" id="node2" href="$class_entity.html#a02639e189d195107b07d919f92a9ec80" title="Entity::setEntityID" alt="" coords="188,5,316,32"/>
+<area shape="rect" id="node3" href="$class_entity.html#a691dbe5f9ec930c27af2af0b97907a9e" title="Entity::destroy" alt="" coords="199,56,305,83"/>
+</map>

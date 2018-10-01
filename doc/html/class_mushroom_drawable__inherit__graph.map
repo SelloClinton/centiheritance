@@ -1,0 +1,3 @@
+<map id="MushroomDrawable" name="MushroomDrawable">
+<area shape="rect" id="node2" href="$class_drawable.html" title="{Drawable\n|# sprite_\l# drawable_id_\l|+ Drawable()\l+ getDrawable()\l+ setPosition()\l+ createDrawable()\l+ ~Drawable()\l# getTexture()\l# getDrawableID()\l}" alt="" coords="18,5,149,185"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Entity::destroy" name="Entity::destroy">
+<area shape="rect" id="node2" href="$class_laser.html#a25c78194500edf5d5c00e70d3ba1eb9f" title="Laser::move" alt="" coords="181,5,273,32"/>
+<area shape="rect" id="node3" href="$class_mushroom.html#a48b415062ea77aace38c4f2eccb240f9" title="Mushroom::weaken" alt="" coords="160,56,295,83"/>
+</map>

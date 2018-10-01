@@ -1,0 +1,6 @@
+<map id="Entity::position" name="Entity::position">
+<area shape="rect" id="node2" href="$class_laser.html#a25c78194500edf5d5c00e70d3ba1eb9f" title="Laser::move" alt="" coords="173,5,265,32"/>
+<area shape="rect" id="node3" href="$class_player.html#a2401ed67063661063e23a4bbf1533d23" title="Player::move" alt="" coords="170,56,267,83"/>
+<area shape="rect" id="node4" href="$class_player.html#a4cdc67fd9ca2de09af89d9ae19efe5f8" title="Player::shoot" alt="" coords="169,107,268,133"/>
+<area shape="rect" id="node5" href="$class_segment.html#a5d2a76df700a7c5e49cbbeb49cf35b68" title="Segment::move" alt="" coords="163,157,275,184"/>
+</map>

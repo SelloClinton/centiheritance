@@ -1,0 +1,6 @@
+<map id="Entity" name="Entity">
+<area shape="rect" id="node2" href="$class_laser.html" title="Laser" alt="" coords="5,80,60,107"/>
+<area shape="rect" id="node3" href="$class_mushroom.html" title="Mushroom" alt="" coords="85,80,167,107"/>
+<area shape="rect" id="node4" href="$class_player.html" title="Player" alt="" coords="191,80,250,107"/>
+<area shape="rect" id="node5" href="$class_segment.html" title="Segment" alt="" coords="274,80,349,107"/>
+</map>

@@ -27,6 +27,17 @@ void Drawer::drawGameObjects(list<shared_ptr<Entity>>& entities){
 			window_->draw(*(drawable->getDrawable()));			
 			
 		}
+		 if (entity->getEntityID() == EntityID::STRONG_MUSHROOM){
+			auto player_drawable = make_shared<MushroomDrawable>(entity->getEntityID());
+			shared_ptr<Drawable> drawable = player_drawable;
+			drawable->createDrawable();
+//			auto drawable = make_shared<Drawable>(entity->getEntityID()); 
+			auto[x,y] = entity->position()->getXYPosition();
+			drawable->setPosition(x,y);
+			window_->draw(*(drawable->getDrawable()));
+			
+			
+		 }
 
 	}
 	
@@ -34,8 +45,8 @@ void Drawer::drawGameObjects(list<shared_ptr<Entity>>& entities){
 //		auto drawable_loader = make_shared<DrawablesLoader>();
 //		auto drawable = drawable_loader->loadDrawable(entity->getEntityID());
 //		auto[drawable_x_position,drawable_y_position] = entity->position()->getXYPosition();
-//		drawable->setPosition(drawable_x_position,drawable_y_position);
 //		drawable->createDrawable();
+//		drawable->setPosition(drawable_x_position,drawable_y_position);
 //		window_->draw(*(drawable->getDrawable()));
 //	}
 	

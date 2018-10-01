@@ -1,0 +1,6 @@
+<map id="Drawable" name="Drawable">
+<area shape="rect" id="node2" href="$class_laser_drawable.html" title="{LaserDrawable\n||+ LaserDrawable()\l+ createDrawable()\l}" alt="" coords="5,233,136,325"/>
+<area shape="rect" id="node3" href="$class_mushroom_drawable.html" title="{MushroomDrawable\n||+ MushroomDrawable()\l+ createDrawable()\l}" alt="" coords="161,233,317,325"/>
+<area shape="rect" id="node4" href="$class_player_drawable.html" title="{PlayerDrawable\n||+ PlayerDrawable()\l+ createDrawable()\l}" alt="" coords="341,233,473,325"/>
+<area shape="rect" id="node5" href="$class_segment_drawable.html" title="{SegmentDrawable\n||+ SegmentDrawable()\l+ createDrawable()\l}" alt="" coords="497,233,644,325"/>
+</map>

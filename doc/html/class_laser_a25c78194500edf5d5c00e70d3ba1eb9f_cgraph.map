@@ -1,0 +1,4 @@
+<map id="Laser::move" name="Laser::move">
+<area shape="rect" id="node2" href="$class_entity.html#a31001753c9849d983262ef3b378b9484" title="Entity::position" alt="" coords="145,5,255,32"/>
+<area shape="rect" id="node3" href="$class_entity.html#a691dbe5f9ec930c27af2af0b97907a9e" title="Entity::destroy" alt="" coords="147,56,253,83"/>
+</map>

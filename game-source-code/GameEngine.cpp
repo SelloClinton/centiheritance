@@ -101,10 +101,10 @@ void GameEngine::drawObjects(){
 //		game_object = laser;
 //		game_objects_.push_back(game_object);
 //	}
-//	for(auto& mushroom:field_->getMushrooms()){
-//		game_object = mushroom;
-//		game_objects_.push_back(game_object);
-//	}
+	for(auto& mushroom:field_->getMushrooms()){
+		game_object = mushroom;
+		game_objects_.push_back(game_object);
+	}
 	
 	drawer_->drawGameObjects(game_objects_);
 	
