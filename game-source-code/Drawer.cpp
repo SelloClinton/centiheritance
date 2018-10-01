@@ -10,21 +10,30 @@ Drawer::Drawer(shared_ptr<sf::RenderWindow> window):
 }
 
 void Drawer::drawGameObjects(list<shared_ptr<Entity>>& entities){
-	auto numberOfEntities = entities.size();
-	auto drawables_loader = make_unique<DrawablesLoader>(entities,numberOfEntities);
-	auto drawables = drawables_loader->loadDrawables();
+//	auto numberOfEntities = entities.size();
+//	auto drawables_loader = make_unique<DrawablesLoader>(entities,numberOfEntities);
+//	auto drawables = drawables_loader->loadDrawables();
+//	
+//	auto entities_iterator = begin(entities);
+//	auto drawables_iterator = begin(drawables);
 	
-	auto entities_iterator = begin(entities);
-	auto drawables_iterator = begin(drawables);
 	
-	while((entities_iterator != end(entities)&&(drawables_iterator != end(drawables)))){
-		(*drawables_iterator)->createDrawable();
-		auto[x,y] = (*entities_iterator)->position()->getXYPosition();
-		(*drawables_iterator)->setPosition(x,y);
-//		window_->draw(*((*drawables_iterator)->getDrawable()));
-		window_->draw(*(*drawables_iterator)->getDrawable());
-		
+	for(auto& entity:entities){
+		auto drawable_loader = make_shared<DrawablesLoader>();
+		auto drawable = drawable_loader->loadDrawable(entity->getEntityID());
+		auto[drawable_x_position,drawable_y_position] = entity->position()->getXYPosition();
+		drawable->setPosition(drawable_x_position,drawable_y_position);
+		drawable->createDrawable();
+		window_->draw(*(drawable->getDrawable()));
 	}
+//	while((entities_iterator != end(entities)&&(drawables_iterator != end(drawables)))){
+//		(*drawables_iterator)->createDrawable();
+//		auto[x,y] = (*entities_iterator)->position()->getXYPosition();
+//		(*drawables_iterator)->setPosition(x,y);
+////		window_->draw(*((*drawables_iterator)->getDrawable()));
+//		window_->draw(*(*drawables_iterator)->getDrawable());
+//		
+//	}
 	
 //	for(auto& drawable:drawables){
 //		drawable->createDrawable();
