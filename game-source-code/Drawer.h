@@ -16,6 +16,7 @@
 #include "DrawablesLoader.h"
 #include "Entity.h"
 #include "Drawable.h"
+#include "PlayerDrawable.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

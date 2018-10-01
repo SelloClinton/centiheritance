@@ -8,24 +8,20 @@ DrawablesLoader::DrawablesLoader()
 }
 
 shared_ptr<Drawable> DrawablesLoader::loadDrawable(const EntityID& drawable_id){
-	if(isPlayer(drawable_id)){
-		auto drawable = createPlayerDrawable(drawable_id);
-		return drawable;
-	}
-	else if(isLaser((drawable_id))){
-		auto drawable =createLaserDrawable(drawable_id);
-		return drawable;
-	}
+	if(isPlayer(drawable_id))
+		createPlayerDrawable(drawable_id);
+	else if(isLaser((drawable_id)))
+		createLaserDrawable(drawable_id);
+	else if(isMushroom(drawable_id))
+		createMushroomDrawable(drawable_id);
+	else if(isSegment(drawable_id))
+		createSegmentDrawable(drawable_id); 
 	
-	else if(isMushroom(drawable_id)){
-		auto drawable =createMushroomDrawable(drawable_id);
-		return drawable;
-	}
-	
-	else if(isSegment(drawable_id)){
-		auto drawable =createSegmentDrawable(drawable_id); 
-		return drawable;
-	}
+	getDrawable();
+}
+
+shared_ptr<Drawable> DrawablesLoader::getDrawable(){
+		return drawable_;
 }
 
 //shared_ptr<Drawable> DrawablesLoader::identityDrawable(const EntityID& drawable_id){
@@ -111,30 +107,29 @@ bool DrawablesLoader::isMushroom(const EntityID& drawable_id){
 //	
 //}
 
-shared_ptr<Drawable> DrawablesLoader::createPlayerDrawable(const EntityID& drawable_id){
+void DrawablesLoader::createPlayerDrawable(const EntityID& drawable_id){
 	auto player_drawable = make_shared<PlayerDrawable>(drawable_id);
-	shared_ptr<Drawable> drawable = player_drawable;
-	return drawable; 
+	drawable_ = player_drawable;
+//	return drawable; 
 //	drawables_.push_back(drawable);	
 }
-shared_ptr<Drawable> DrawablesLoader::createLaserDrawable(const EntityID& drawable_id){
+void DrawablesLoader::createLaserDrawable(const EntityID& drawable_id){
 	auto laser_drawable = make_shared<LaserDrawable>(drawable_id);
-	shared_ptr<Drawable> drawable = laser_drawable;
+	drawable_ = laser_drawable;
 //	drawables_.insert(entity_iter,drawable);
-	return drawable; 
 //	drawables_.push_back(drawable);	
 }
-shared_ptr<Drawable> DrawablesLoader::createSegmentDrawable(const EntityID& drawable_id){
+void DrawablesLoader::createSegmentDrawable(const EntityID& drawable_id){
 	auto segment_drawable = make_shared<SegmentDrawable>(drawable_id);
-	shared_ptr<Drawable> drawable = segment_drawable;
+	drawable_ = segment_drawable;
 //	drawables_.insert(entity_iter,drawable);
-	return drawable; 
+//	return drawable; 
 //	drawables_.push_back(drawable);
 }
-shared_ptr<Drawable> DrawablesLoader::createMushroomDrawable(const EntityID& drawable_id){
+void DrawablesLoader::createMushroomDrawable(const EntityID& drawable_id){
 	auto player_drawable = make_shared<MushroomDrawable>(drawable_id);
-	shared_ptr<Drawable> drawable = player_drawable;
+	drawable_ = player_drawable;
 //	drawables_.insert(entity_iter,drawable);
-	return drawable; 
+//	return drawable; 
 //	drawables_.push_back(drawable);
 }

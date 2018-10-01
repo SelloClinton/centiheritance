@@ -27,6 +27,7 @@ private:
 //	int number_of_drawables_;
 //	Drawables drawables_;
 	shared_ptr<Drawable> drawable_;
+	shared_ptr<Drawable> getDrawable();
 	
 	shared_ptr<Drawable> identityDrawable(const EntityID& drawable_id);
 	
@@ -36,10 +37,10 @@ private:
 	bool isMushroom(const EntityID& drawable_id);
 	
 //	shared_ptr<Drawable> initiateDrawables(const EntityID& drawable_id);
-	shared_ptr<Drawable> createPlayerDrawable(const EntityID& drawable_id);
-	shared_ptr<Drawable> createLaserDrawable(const EntityID& drawable_id);
-	shared_ptr<Drawable> createSegmentDrawable(const EntityID& drawable_id);
-	shared_ptr<Drawable> createMushroomDrawable(const EntityID& drawable_id);
+	void createPlayerDrawable(const EntityID& drawable_id);
+	void createLaserDrawable(const EntityID& drawable_id);
+	void createSegmentDrawable(const EntityID& drawable_id);
+	void createMushroomDrawable(const EntityID& drawable_id);
 	
 
 };

@@ -16,16 +16,29 @@ void Drawer::drawGameObjects(list<shared_ptr<Entity>>& entities){
 //	
 //	auto entities_iterator = begin(entities);
 //	auto drawables_iterator = begin(drawables);
-	
-	
 	for(auto& entity:entities){
-		auto drawable_loader = make_shared<DrawablesLoader>();
-		auto drawable = drawable_loader->loadDrawable(entity->getEntityID());
-		auto[drawable_x_position,drawable_y_position] = entity->position()->getXYPosition();
-		drawable->setPosition(drawable_x_position,drawable_y_position);
-		drawable->createDrawable();
-		window_->draw(*(drawable->getDrawable()));
+		if(entity->getEntityID() == EntityID::PLAYER){
+//			auto player_drawable = make_shared<PlayerDrawable>(entity->getEntityID());
+//			shared_ptr<Drawable> drawable = player_drawable;
+//			drawable->createDrawable();
+			auto drawable = make_shared<Drawable>(entity->getEntityID()); 
+			auto[x,y] = entity->position()->getXYPosition();
+			drawable->setPosition(x,y);
+			window_->draw(*(drawable->getDrawable()));			
+			
+		}
+
 	}
+	
+//	for(auto& entity:entities){
+//		auto drawable_loader = make_shared<DrawablesLoader>();
+//		auto drawable = drawable_loader->loadDrawable(entity->getEntityID());
+//		auto[drawable_x_position,drawable_y_position] = entity->position()->getXYPosition();
+//		drawable->setPosition(drawable_x_position,drawable_y_position);
+//		drawable->createDrawable();
+//		window_->draw(*(drawable->getDrawable()));
+//	}
+	
 //	while((entities_iterator != end(entities)&&(drawables_iterator != end(drawables)))){
 //		(*drawables_iterator)->createDrawable();
 //		auto[x,y] = (*entities_iterator)->position()->getXYPosition();
