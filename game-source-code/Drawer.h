@@ -14,6 +14,7 @@
 //#include "Constants.h"
 
 #include "DrawablesLoader.h"
+#include "MushroomDrawable.h"
 #include "Entity.h"
 #include "Drawable.h"
 #include "PlayerDrawable.h"

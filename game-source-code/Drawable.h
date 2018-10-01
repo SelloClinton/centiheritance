@@ -16,7 +16,7 @@ public:
 	Drawable(const EntityID& drawableID);
 	shared_ptr<sf::Sprite> getDrawable();
 	void setPosition(float x, float y);
-//	virtual void createDrawable() = 0;
+	virtual void createDrawable() = 0;
 	
 	virtual ~Drawable(){}
 		

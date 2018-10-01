@@ -36,5 +36,5 @@ void Drawable::loadTexture(){
 void Drawable::loadSprite(){
 	sprite_->setTexture(*texture_);
 	sprite_->setScale(2.5,2.5);
-	sprite_->setTextureRect(sf::IntRect(21,9,8,8));
+//	sprite_->setTextureRect(sf::IntRect(21,9,8,8));
 }

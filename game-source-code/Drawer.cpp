@@ -18,10 +18,10 @@ void Drawer::drawGameObjects(list<shared_ptr<Entity>>& entities){
 //	auto drawables_iterator = begin(drawables);
 	for(auto& entity:entities){
 		if(entity->getEntityID() == EntityID::PLAYER){
-//			auto player_drawable = make_shared<PlayerDrawable>(entity->getEntityID());
-//			shared_ptr<Drawable> drawable = player_drawable;
-//			drawable->createDrawable();
-			auto drawable = make_shared<Drawable>(entity->getEntityID()); 
+			auto player_drawable = make_shared<LaserDrawable>(EntityID::LASER);
+			shared_ptr<Drawable> drawable = player_drawable;
+			drawable->createDrawable();
+//			auto drawable = make_shared<Drawable>(entity->getEntityID()); 
 			auto[x,y] = entity->position()->getXYPosition();
 			drawable->setPosition(x,y);
 			window_->draw(*(drawable->getDrawable()));			
