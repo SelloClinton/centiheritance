@@ -20,7 +20,6 @@ class Laser : public Entity{
 public:
 		Laser(float x_pos, float y_pos, EntityID id, float speed);
         void move();
-		virtual ~Laser();
 private:
 		float speed_;
 		float getSpeed()const;

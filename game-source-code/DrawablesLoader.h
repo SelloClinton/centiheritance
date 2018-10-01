@@ -26,7 +26,7 @@ public:
 private:
 //	int number_of_drawables_;
 //	Drawables drawables_;
-//	shared_ptr<Drawable> drawable_;
+	shared_ptr<Drawable> drawable_;
 	
 	shared_ptr<Drawable> identityDrawable(const EntityID& drawable_id);
 	

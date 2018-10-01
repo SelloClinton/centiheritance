@@ -32,7 +32,6 @@ public:
 		void updateLasers();
 		Lasers& getLasers(); 
 //		void updateLasersCapacity();
-		virtual ~Player();
 private:
 		unique_ptr<Mover> mover_;
 		Lasers lasers_;

@@ -16,7 +16,7 @@ public:
 	void setPosition(float x, float y);
 	virtual void createDrawable() = 0;
 	
-	virtual ~Drawable();
+	virtual ~Drawable(){}
 		
 protected:
 	shared_ptr<sf::Texture> getTexture();

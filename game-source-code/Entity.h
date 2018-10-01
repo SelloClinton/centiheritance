@@ -17,7 +17,7 @@ public:
 	EntityID getEntityID()const;
 	void setEntityID(EntityID id);
 	
-	virtual ~Entity();
+	virtual ~Entity(){}
 private:
 	shared_ptr<Position> position_;
 	EntityID entity_id_;
