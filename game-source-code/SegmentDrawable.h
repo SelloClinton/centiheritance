@@ -9,6 +9,7 @@ class SegmentDrawable : public Drawable{
 public:
 	SegmentDrawable(const EntityID& drawableID);
 	virtual void createDrawable();
+	virtual ~SegmentDrawable();
 private:
 	
 };

@@ -15,6 +15,8 @@ public:
 	shared_ptr<sf::Sprite> getDrawable();
 	void setPosition(float x, float y);
 	virtual void createDrawable() = 0;
+	
+	virtual ~Drawable();
 		
 protected:
 	shared_ptr<sf::Texture> getTexture();

@@ -24,6 +24,8 @@ public:
         bool isFacingRight();
 		bool isFacingDown();
 		bool isFacingUp();
+		
+		virtual ~Segment();
 private:
         shared_ptr<Mover> mover_;
         bool right_flag_;

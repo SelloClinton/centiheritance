@@ -7,6 +7,7 @@ class LaserDrawable : public Drawable{
 public:
 	LaserDrawable(const EntityID& drawableID);
 	virtual void createDrawable();
+	virtual ~LaserDrawable();
 private:	
 };
 #endif

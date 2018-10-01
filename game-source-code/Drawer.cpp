@@ -21,7 +21,8 @@ void Drawer::drawGameObjects(list<shared_ptr<Entity>>& entities){
 		(*drawables_iterator)->createDrawable();
 		auto[x,y] = (*entities_iterator)->position()->getXYPosition();
 		(*drawables_iterator)->setPosition(x,y);
-		window_->draw(*((*drawables_iterator)->getDrawable()));
+//		window_->draw(*((*drawables_iterator)->getDrawable()));
+		window_->draw(*(*drawables_iterator)->getDrawable());
 		
 	}
 	

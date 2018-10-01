@@ -7,6 +7,7 @@ class PlayerDrawable : public Drawable{
 public:
 	PlayerDrawable(const EntityID& drawableID);
 	virtual void createDrawable();
+	virtual ~PlayerDrawable();
 private:
 	
 };

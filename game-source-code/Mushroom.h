@@ -15,6 +15,7 @@ class Mushroom : public Entity{
 public:	
 		Mushroom(float x_pos, float y_pos, EntityID id);
 		void weaken();
+		virtual ~Mushroom();
 private:
 		int number_of_lives;
 		
